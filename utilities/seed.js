@@ -3,6 +3,7 @@ const fs = require('fs');
 
 connection.connect.then(()=>{
     //connection to db successfull
+
     //get article model
     const ArticleModel = require('../models/article.model');
 
@@ -13,9 +14,9 @@ connection.connect.then(()=>{
             connection.disconnect();
         } else {
             //Seed the DB
-            fs.readFile('../assets/jsondata.json', (err, data)=>{
+            fs.readFile(__dirname+'/../assets/jsondata.json', (err, data)=>{
                 if(err) {
-                    console.log('error reading json file: '+err);
+                    console.log('error reading json file: '+ err);
                     connection.disconnect();
                 } else {
                     const articles = JSON.parse(data);
@@ -29,7 +30,10 @@ connection.connect.then(()=>{
                 }
             });
         }
-    }).catch(err=>console.log('error couting documents : '+err));
+    }).catch(err=>{
+        console.log('error couting documents : '+err);
+        connection.disconnect();
+    });
 }).catch(()=>{
     console.log("Seeding database failed!");
 });
