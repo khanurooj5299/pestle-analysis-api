@@ -1,3 +1,4 @@
+require('dotenv').config({path: __dirname+'/../.env'});
 const connection = require('./connection');
 const fs = require('fs');
 
