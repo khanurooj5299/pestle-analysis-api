@@ -9,12 +9,14 @@ connection.connect
 
     const app = express();
     const PORT = process.env.PORT | 3000;
+    const articleRouter = require('./routers/article.router');
 
     //register middleware
     app.use(express.json());
     app.use(cors());
 
     //register paths
+    app.use("/articles", articleRouter);
     //Wildcard path for catching ecverything that didn't match
     app.use("*", (req, res) => {
       throw new Error(404);
@@ -35,6 +37,6 @@ connection.connect
     });
 
     //Start server
-    app.listen(PORT, ()=>console.log(`Server listening on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
   })
   .catch(() => console.log("Could not start application"));
