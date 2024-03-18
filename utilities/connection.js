@@ -9,4 +9,9 @@ const connectionPromise = mongoose.connect(process.env.MONGO_URI | 27017).then((
     throw err;
 });
 
-module.exports = connectionPromise;
+function disconnect() {
+    mongoose.connection.close();
+}
+
+module.exports.connect = connectionPromise;
+module.exports.disconnect = disconnect;
