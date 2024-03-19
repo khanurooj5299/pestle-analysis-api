@@ -9,7 +9,7 @@ connection.connect
 
     const app = express();
     const PORT = process.env.PORT | 3000;
-    const observationRouter = require('./routers/article.router');
+    const observationRouter = require('./routers/observation.router');
 
     //register middleware
     app.use(express.json());
@@ -39,4 +39,7 @@ connection.connect
     //Start server
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
   })
-  .catch(() => console.log("Could not start application"));
+  .catch((err) => {
+    console.log("Could not start application");
+    console.log(err);
+  });
