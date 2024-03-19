@@ -6,36 +6,39 @@ connection.connect
   .then(() => {
     //connection to db successfull
 
-    //get article model
-    const ArticleModel = require("../models/article.model");
+    //get observation model
+    const ObservationModel = require("../models/observation.model");
 
     //checking if db is already seeded
-    ArticleModel.estimatedDocumentCount()
+    ObservationModel.estimatedDocumentCount()
       .then((count) => {
         if (count > 0) {
           console.log("DB already seeded");
           connection.disconnect();
         } else {
           //Seed the DB
-          fs.readFile(__dirname + "/../assets/jsondata.json", (err, data) => {
-            if (err) {
-              console.log("error reading json file: " + err);
-              connection.disconnect();
-            } else {
-              const articles = JSON.parse(data);
-              ArticleModel.insertMany(articles)
-                .then((result) => {
-                  if (result.length > 0) {
-                    console.log("Seeding successful");
-                  } else {
-                    console.log(
-                      "Seeding unsuccessful. One or more documents do not conform to schema"
-                    );
-                  }
-                })
-                .finally(() => connection.disconnect());
+          fs.readFile(
+            __dirname + "/../assets/pestle-analysis.json",
+            (err, data) => {
+              if (err) {
+                console.log("error reading json file: " + err);
+                connection.disconnect();
+              } else {
+                const observations = JSON.parse(data);
+                ObservationModel.insertMany(observations)
+                  .then((result) => {
+                    if (result.length > 0) {
+                      console.log("Seeding successful");
+                    } else {
+                      console.log(
+                        "Seeding unsuccessful. One or more documents do not conform to schema"
+                      );
+                    }
+                  })
+                  .finally(() => connection.disconnect());
+              }
             }
-          });
+          );
         }
       })
       .catch((err) => {
@@ -43,6 +46,7 @@ connection.connect
         connection.disconnect();
       });
   })
-  .catch(() => {
+  .catch((err) => {
     console.log("Seeding database failed!");
+    console.log(err);
   });

@@ -9,14 +9,14 @@ connection.connect
 
     const app = express();
     const PORT = process.env.PORT | 3000;
-    const articleRouter = require('./routers/article.router');
+    const observationRouter = require('./routers/article.router');
 
     //register middleware
     app.use(express.json());
     app.use(cors());
 
     //register paths
-    app.use("/articles", articleRouter);
+    app.use("/observation", observationRouter);
     //Wildcard path for catching ecverything that didn't match
     app.use("*", (req, res) => {
       throw new Error(404);

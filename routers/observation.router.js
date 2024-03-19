@@ -1,11 +1,11 @@
 const express = require("express");
-const articleModel = require("../models/article.model");
+const ObservationModel = require("../models/observation.model");
 
 const router = express.Router();
 
-//get all articles
+//get all observations
 router.get("", (req, res, next) => {
-  articleModel
+  ObservationModel
     .find({})
     .then(data => res.json(data))
     .catch(next);

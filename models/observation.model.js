@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const articleSchema = mongoose.Schema({
+//A single observation for pestle analysis looks like below
+const observationSchema = mongoose.Schema({
   end_year: Number,
   intensity: Number,
   sector: String,
@@ -20,6 +21,6 @@ const articleSchema = mongoose.Schema({
   likelihood: Number,
 });
 
-const ArticleModel = mongoose.model("articles", articleSchema);
+const ObservationModel = mongoose.model("observations", observationSchema);
 
-module.exports = ArticleModel;
+module.exports = ObservationModel;
