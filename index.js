@@ -31,7 +31,7 @@ connection.connect
       if (err.message == 404) {
         res.status(404).send("Nothing here");
       } else {
-        console.dir(err.message);
+        console.dir(err.message || err);
         res.status(500).send("Something went wrong!");
       }
     });
