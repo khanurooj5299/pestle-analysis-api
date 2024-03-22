@@ -5,7 +5,7 @@ const router = express.Router();
 
 //get all observations
 router.get("/observations", (req, res, next) => {
-  ObservationModel.find({})
+  ObservationModel.find({}).sort({published: 1})
     .then((data) => res.json(data))
     .catch(next);
 });
