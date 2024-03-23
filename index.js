@@ -9,7 +9,7 @@ connection.connect
 
     const app = express();
     const PORT = process.env.PORT | 3000;
-    const observationRouter = require('./routers/observation.router');
+    const observationRouter = require("./routers/observation.router");
 
     //register middleware
     app.use(express.json());
@@ -30,6 +30,8 @@ connection.connect
       }
       if (err.message == 404) {
         res.status(404).send("Nothing here");
+      } else if (err.status == 400) {
+        res.status(400).send(err.message || "Bad request");
       } else {
         console.dir(err.message || err);
         res.status(500).send("Something went wrong!");
