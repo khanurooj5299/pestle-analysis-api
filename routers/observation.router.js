@@ -63,4 +63,11 @@ router.get("/observations/stacked-bars-plot", (req, res, next) => {
   }
 });
 
+
+//returns the possible values for a category
+router.get("/get-category-domain/:category", (req, res, next) => {
+  const category = req.params.category;
+  ObservationModel.distinct(category).then(data=>res.json(data.filter(d=>d))).catch(next);
+});
+
 module.exports = router;

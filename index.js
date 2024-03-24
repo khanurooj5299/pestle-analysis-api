@@ -1,6 +1,7 @@
 require("dotenv").config(); //this line should be at top so that for any module the environment variables are available
 const connection = require("./utilities/connection"); //to connect to the DB
 
+//Application will start only when connection to DB is succesfull
 connection.connect
   .then(() => {
     //--------MAIN APPLICATION LOGIC---------
